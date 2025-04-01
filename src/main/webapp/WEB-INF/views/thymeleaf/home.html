@@ -1,35 +1,23 @@
-<!DOCTYPE HTML>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <title>Taller Web I</title>
-
-  <!-- Boostrap core css -->
-  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
-
-  <!-- custom style -->
-  <link rel="stylesheet" th:href="@{/css/main.css}"/>
-
+  <meta charset="UTF-8">
+  <title>Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
 
-<body>
-
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand" href="#">UNLAM</a>
+<nav class="bg-gray-800 p-4 text-white fixed top-0 w-full">
+  <div class="container mx-auto">
+    <a class="text-lg font-bold" href="#">Taller Integrador</a>
+  </div>
 </nav>
 
-<main role="main" class="container">
-  <div class = "container">
-    <h1>Bienvenidos a Taller Web 1</h1>
+<div class="bg-white shadow-lg rounded-lg p-6 max-w-md text-center">
+  <h1 class="text-2xl font-bold text-gray-800">Bienvenido a mi App</h1>
+  <p class="text-gray-600 mt-2">Esta es un home básico.</p>
+  <a href="/about" class="mt-4 inline-block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"></a>
+</div>
 
-    <a href="login.html" class="btn btn-lg btn-primary btn-block">Volver</a>
-  </div>
-</main>
-<!-- /.container -->
-
-<!-- Boostrap core js -->
-<script type="text/javascript" th:src="@{webjars/bootstrap/5.2.0/js/bootstrap.min.js}"></script>
 </body>
 </html>
