@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil de Usuario</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-100 to-indigo-200 min-h-screen flex items-center justify-center p-4">
+
+<div class="bg-white shadow-2xl rounded-2xl p-8 w-full max-w-lg">
+    <!-- Encabezado -->
+    <div class="flex flex-col items-center">
+        <img class="w-24 h-24 rounded-full border-4 border-indigo-400 shadow-md mb-4" src="https://api.dicebear.com/7.x/initials/svg?seed=U" alt="Avatar de Usuario">
+        <h2 class="text-2xl font-bold text-gray-800 mb-1" th:text="${usuario.email}">usuario@mail.com</h2>
+        <span class="text-sm text-gray-500 uppercase tracking-wide" th:text="${usuario.rol}">USER</span>
+    </div>
+
+    <!-- Info adicional -->
+    <div class="mt-8 space-y-4">
+        <div class="flex justify-between items-center border-b pb-2">
+            <span class="text-gray-600 font-medium">Email:</span>
+            <span class="text-gray-800" th:text="${usuario.email}">usuario@mail.com</span>
+        </div>
+
+        <div class="flex justify-between items-center border-b pb-2">
+            <span class="text-gray-600 font-medium">Rol:</span>
+            <span class="text-gray-800 capitalize" th:text="${usuario.rol}">user</span>
+        </div>
+    </div>
+
+    <!-- Acciones -->
+    <div class="mt-8 flex justify-between">
+        <a href="javascript:history.back()" class="bg-gray-300 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-400 transition">
+            Volver
+        </a>
+
+        <a th:href="@{/logout}" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">
+            Cerrar sesión
+        </a>
+    </div>
+</div>
+
+</body>
+</html>
+
+

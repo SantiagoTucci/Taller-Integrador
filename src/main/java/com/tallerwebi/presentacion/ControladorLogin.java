@@ -22,6 +22,12 @@ public class ControladorLogin {
         this.servicioLogin = servicioLogin;
     }
 
+    @RequestMapping(path = "/", method = RequestMethod.GET)
+    public ModelAndView inicio() {
+        return new ModelAndView("redirect:/login");
+    }
+
+
     @RequestMapping("/login")
     public ModelAndView irALogin() {
 
@@ -36,7 +42,7 @@ public class ControladorLogin {
 
         Usuario usuarioBuscado = servicioLogin.consultarUsuario(datosLogin.getEmail(), datosLogin.getPassword());
         if (usuarioBuscado != null) {
-            request.getSession().setAttribute("ROL", usuarioBuscado.getRol());
+            request.getSession().setAttribute("usuarioLogueado", usuarioBuscado);
             return new ModelAndView("redirect:/home");
         } else {
             model.put("error", "Usuario o clave incorrecta");
@@ -51,19 +57,19 @@ public class ControladorLogin {
             servicioLogin.registrar(usuario);
         } catch (UsuarioExistente e){
             model.put("error", "El usuario ya existe");
-            return new ModelAndView("nuevo-usuario", model);
+            return new ModelAndView("register", model);
         } catch (Exception e){
             model.put("error", "Error al registrar el nuevo usuario");
-            return new ModelAndView("nuevo-usuario", model);
+            return new ModelAndView("register", model);
         }
         return new ModelAndView("redirect:/login");
     }
 
-    @RequestMapping(path = "/nuevo-usuario", method = RequestMethod.GET)
+    @RequestMapping(path = "/register", method = RequestMethod.GET)
     public ModelAndView nuevoUsuario() {
         ModelMap model = new ModelMap();
         model.put("usuario", new Usuario());
-        return new ModelAndView("nuevo-usuario", model);
+        return new ModelAndView("register", model);
     }
 
     @RequestMapping(path = "/home", method = RequestMethod.GET)
@@ -71,9 +77,25 @@ public class ControladorLogin {
         return new ModelAndView("home");
     }
 
-    @RequestMapping(path = "/", method = RequestMethod.GET)
-    public ModelAndView inicio() {
+    @RequestMapping(path = "/perfil", method = RequestMethod.GET)
+    public ModelAndView verPerfil(HttpServletRequest request) {
+        Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioLogueado");
+
+        if (usuario != null) {
+            ModelMap model = new ModelMap();
+            model.put("usuario", usuario);
+            return new ModelAndView("perfil", model);
+        }
+
         return new ModelAndView("redirect:/login");
     }
+
+    @RequestMapping("/logout")
+    public ModelAndView logout(HttpServletRequest request) {
+        request.getSession().invalidate();
+        return new ModelAndView("redirect:/login");
+    }
+
+
 }
 

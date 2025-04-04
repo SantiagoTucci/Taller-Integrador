@@ -1,36 +1,55 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mapa Interactivo de la Facultad</title>
-  <link href="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css" rel="stylesheet" />
-  <script src="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js"></script>
-  <style>
-    #map { width: 100%; height: 500px; }
-  </style>
+  <title>Mapa Interactivo UNLAM</title>
+
+  <!-- Tailwind y Leaflet -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+          crossorigin=""></script>
 </head>
-<body>
 
-<h1>Mapa Interactivo</h1>
-<div id="map"></div>
-git
-<script src="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js"></script>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+<!-- Navbar -->
+<nav class="bg-white shadow-md px-6 py-4 flex justify-between items-center">
+  <div class="text-xl font-bold text-gray-800">
+    UNLAM
+  </div>
+  <div class="space-x-4">
+    <a th:href="@{/perfil}" class="text-blue-600">Perfil</a>
+  </div>
+</nav>
+
+<!-- Contenido principal -->
+<div class="flex-grow flex items-center justify-center">
+  <div class="w-3/4 h-3/4 bg-white rounded-lg shadow-lg p-4">
+    <h1 class="text-2xl font-bold text-center mb-4">Mapa Interactivo</h1>
+    <div id="map" class="w-full h-96"></div>
+  </div>
+</div>
+
 <script>
-  mapboxgl.accessToken = 'tu_api_key_de_mapbox';
-  var map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v11',
-      center: [-58.5402, -34.7372], // Coordenadas de la facultad
-      zoom: 16
-  });
+  // Inicializar el mapa centrado en la UNLaM
+  var map = L.map('map').setView([-34.6706, -58.5628], 17);
 
-  // Añadir marcador
-  new mapboxgl.Marker()
-      .setLngLat([-58.5402, -34.7372])
-      .setPopup(new mapboxgl.Popup().setHTML("<h3>Facultad de la Matanza</h3>"))
-      .addTo(map);
+  // Agregar capa de mapa
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap'
+  }).addTo(map);
+
+  // Agregar marcador en la ubicación de la UNLaM
+  L.marker([-34.6706, -58.5628]).addTo(map)
+      .bindPopup('<b>Universidad Nacional de La Matanza</b><br>San Justo, Buenos Aires')
+      .openPopup();
 </script>
 
 </body>
 </html>
+

@@ -10,7 +10,7 @@
 
 <!-- Mitad izquierda (Imagen o Branding) -->
 <div class="w-1/2 bg-blue-600 flex items-center justify-center">
-    <h1 class="text-white text-4xl font-bold">Bienvenido de nuevo</h1>
+    <h1 class="text-white text-4xl font-bold">Inicia sesión como alumno</h1>
 </div>
 
 <!-- Mitad derecha (Formulario) -->
@@ -37,7 +37,7 @@
             <p th:if="${error != null}" class="text-red-500 text-sm text-center mt-2" th:text="'Error: ' + ${error}"></p>
 
             <p class="text-center text-gray-600 text-sm mt-4">
-                ¿No tienes cuenta? <a th:href="@{/nuevo-usuario}" class="text-blue-600 font-semibold">Regístrate</a>
+                ¿No tienes cuenta? <a th:href="@{/register}" class="text-blue-600 font-semibold">Regístrate</a>
             </p>
         </form>
     </div>
